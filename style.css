@@ -1,0 +1,57 @@
+.layout {
+    background-color: #FFD2AA;
+    color: #552800;
+border-radius: 30px;
+}
+.days{
+    background-color: #FFF1C2;
+}
+.days-of-week{
+    color: #552800;
+}
+.day1{
+    background-color: #ECC989;
+    color: #704A1F;
+    border-radius: 30px;
+}
+.day1:hover{
+    background-color:#DBB878;
+    color: #704A1F;
+    border-radius: 30px; 
+}
+.create-layout{
+background-color: #FFF1C2;
+}
+.create-botton{
+    color: #5D1D1D;
+    background-color: #E4AE7E;
+    border-radius: 30px;
+}
+.name{
+color: #804715;
+background-color: #FFD2AA;
+border-radius: 30px;
+}
+.time{
+    color: #804715;
+    background-color: #FFD2AA;
+    border-radius: 30px;
+}
+h2{
+    color: #552800;
+    background-color: #FFD2AA;
+    border-radius: 30px;
+    text-align: center;
+}
+lesson-item1{
+    background-attachment: #FFC693;
+    color: #704A1F;
+}
+lesson-item2{
+    background-attachment: #FFC693;
+    color: #704A1F;
+}
+lesson-item3{
+    background-attachment: #FFC693;
+    color: #704A1F;
+}
