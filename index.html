@@ -7,7 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 class="layout">Розклад уроків</h1>
+    <div class="container_header"><h1 class="layout">Розклад уроків</h1></div>
+    <div class="container">
     <div class="days">
         <h1 class="days-of-week">дні тижня</h1>
         <p class="day1">Понеділок</p>
@@ -19,24 +20,31 @@
         <p class="day1">Неділя</p>
     </div>
     <div class="create-layout">
-     <h1 class="layout">Створення розкладу</h1>
+     <h1 class="create-header">Створення розкладу</h1>
         <form>
+        
             <button class="create-button">СТВОРИТИ</button>
-            <input class="name">НАЗВА УРОКУ
-            <input class="time">ЧАС
+            <input class="name" placeholder="НАЗВА УРОКУ">
+            <input class="time"placeholder="ЧАС">
         </form>
         <h2>День тижня</h2>
     <div class="lessons">
         <div class="lessons-item1">
-            <p>Час                         Предмет</p>
+            <p class="lessons-item3">Час </p>
+            <p class="lessons-item2">предмет</p>
         </div>
-        <div class="lessons-item2">
-            <p>Час                         Предмет</p>
+        <div class="lessons-item1">
+            <p class="lessons-item3">Час</p>
+            <p class="lessons-item2">предмет</p>
         </div>
-        <div class="lessons-item3">
-            <p>Час                         Предмет</p>
+        <div class="lessons-item1">
+            <p class="lessons-item3">Час</p>
+            <p class="lessons-item2">предмет</p>
         </div>
+  
     </div>
     </div>
+    </div>
+
 </body>
 </html>

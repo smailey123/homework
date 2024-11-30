@@ -1,10 +1,34 @@
+body{
+    background-color: #AA6E39;
+}
+.container_header{
+    width: 100%;
+   
+    display: flex;
+    justify-content: center;
+}
 .layout {
     background-color: #FFD2AA;
     color: #552800;
 border-radius: 30px;
+text-align: center;
+width: 500px;
+
+
+}
+.container{
+    display: flex;
+    width: 100%;
+   
+    justify-content: space-around;
 }
 .days{
     background-color: #FFF1C2;
+    display: block;
+    width: 15%;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 30px;
 }
 .days-of-week{
     color: #552800;
@@ -13,6 +37,7 @@ border-radius: 30px;
     background-color: #ECC989;
     color: #704A1F;
     border-radius: 30px;
+    padding: 5px;
 }
 .day1:hover{
     background-color:#DBB878;
@@ -21,37 +46,69 @@ border-radius: 30px;
 }
 .create-layout{
 background-color: #FFF1C2;
+display: flex;
+flex-direction: column;
+align-items:center;
+border-radius: 30px;
+padding: 2%;
 }
-.create-botton{
+.create-button{
     color: #5D1D1D;
     background-color: #E4AE7E;
     border-radius: 30px;
+    border: #E4AE7E 50px;
+    padding: 5px;
+}
+.create-header{
+    width: 80%;
+    background-color: #FFD2AA;
+    color: #552800;
+border-radius: 30px;
+text-align: center;
 }
 .name{
 color: #804715;
 background-color: #FFD2AA;
 border-radius: 30px;
+border:none
 }
 .time{
     color: #804715;
     background-color: #FFD2AA;
     border-radius: 30px;
+    border: none;
 }
 h2{
     color: #552800;
     background-color: #FFD2AA;
     border-radius: 30px;
     text-align: center;
+    padding: 15px;
 }
-lesson-item1{
-    background-attachment: #FFC693;
+.lessons-item1{
+    display: flex;
+    background-color: #FFC693;
     color: #704A1F;
+    justify-content:space-between;
+    width: 100%;
+    border-radius: 30px;
+    padding: 0 10px 0 10px;
+    margin: 10px;
 }
-lesson-item2{
-    background-attachment: #FFC693;
-    color: #704A1F;
+
+form{
+    background-color: #FFD2AA;
+    padding: 10px;
+    border-radius: 30px;
 }
-lesson-item3{
-    background-attachment: #FFC693;
-    color: #704A1F;
+.lessons{
+    display: block;
+    justify-content: ;
+    width: 200px;
+}
+.lesson-item2{
+
+}
+.lesson-item3{
+
 }
