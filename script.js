@@ -1,12 +1,14 @@
 // document.cookies =
 //   "Math1,8:00,;Math2,9:30,;Math3,11:30,;.History1,8:30,;History2,10:30,;History3,12:30,;.Literature1,8:30,;Literature1,10:30,;Literature1,12:30,;.";
-console.log("Те, як розклад виглядає в кукі", document.cookies);
+console.log("Те, як розклад виглядає в кукі", document.cookie);
+document.cookie = "qwer=23423;path=/;max-age=10000000000000000000000"
 //перетворення розкладу з кукі у js
 function convertFromCookiesToJs() {
     let lessons;
-    if(!document.cookies) {
+    if(!document.cookie) {
         console.log('dd')
-        document.cookies = "";
+        document.cookie = "qwer=23423;path=/;max-age=100000000"
+        console.log("asd",document.cookie)
         lessons = [
             [],
             [],
@@ -19,7 +21,7 @@ function convertFromCookiesToJs() {
         return lessons;
     }
   //Ділю роклад за крапкою на дні
-  const days = document.cookies.split(".");
+  const days = document.cookie.split(".");
   console.log("Дні", days);
 
   //Ділю дні за крапкою з комою на заняття,
@@ -73,8 +75,8 @@ if(lessons[dayNumber]){
 for(let i = 0;i < dayButtons.length;i++){
     dayButtons[i].addEventListener("click", function(){
         dayNumber = i
-        
-        
+        time.value = ''
+        nameInput.value = ''
         _lessons.innerHTML = ``
         for(let i = 0;i < lessons[dayNumber].length;i++){
             _lessons.innerHTML += `<div class="lessons-item1">
@@ -106,13 +108,15 @@ function saveToCookies() {
       cookiesShedule += ".";
     });
   
-    document.cookies = cookiesShedule;
+    document.cookie = cookiesShedule;
     console.log("SADF",cookiesShedule);
 }
 
 create_button.addEventListener("click", function(e){
     e.preventDefault()
     onAdd(dayNumber,time.value,nameInput.value)
+    time.value = ''
+    nameInput.value = ''
     _lessons.innerHTML += `<div class="lessons-item1">
                 <p class="lessons-item3">${lessons[dayNumber][lessons[dayNumber].length - 1].time} </p>
                 <p class="lessons-item2">${lessons[dayNumber][lessons[dayNumber].length - 1].name}</p>
@@ -120,4 +124,5 @@ create_button.addEventListener("click", function(e){
     saveToCookies()
     console.log("les",lessons)
     console.log('name')
+
 })

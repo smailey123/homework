@@ -1,5 +1,6 @@
 body{
     background-color: #AA6E39;
+    font-family:cursive;
 }
 .container_header{
     width: 100%;
@@ -13,7 +14,8 @@ body{
 border-radius: 30px;
 text-align: center;
 width: 500px;
-
+padding: 10px;
+margin-top:-10px
 
 }
 .container{
@@ -25,19 +27,20 @@ width: 500px;
 .days{
     background-color: #FFF1C2;
     display: block;
-    width: 15%;
+    width: 20%;
     padding: 10px;
     margin: 5px;
     border-radius: 30px;
 }
 .days-of-week{
     color: #552800;
+    padding-left: 10%;
 }
 .day1{
     background-color: #ECC989;
     color: #704A1F;
     border-radius: 30px;
-    padding: 5px;
+    padding: 10px;
 }
 .day1:hover{
     background-color:#DBB878;
@@ -57,7 +60,7 @@ padding: 2%;
     background-color: #E4AE7E;
     border-radius: 30px;
     border: #E4AE7E 50px;
-    padding: 5px;
+    padding: 10px;
 }
 .create-header{
     width: 80%;
@@ -70,13 +73,32 @@ text-align: center;
 color: #804715;
 background-color: #FFD2AA;
 border-radius: 30px;
-border:none
+border:none;
+padding: 5px;
+margin:5px;
+border:0;
+outline: 0;
+border-bottom: 1px solid #804715;
+}
+.name::placeholder{
+    color:#804715;
+    
 }
 .time{
     color: #804715;
+background-color: #FFD2AA;
+border-radius: 30px;
+border:none;
+padding: 5px;
+margin:5px;
+border:0;
+outline: 0;
+border-bottom: 1px solid #804715;
+}
+.time::placeholder{
+    padding: 10px;
     background-color: #FFD2AA;
-    border-radius: 30px;
-    border: none;
+    color:#552800;
 }
 h2{
     color: #552800;
@@ -105,10 +127,4 @@ form{
     display: block;
     justify-content: ;
     width: 200px;
-}
-.lesson-item2{
-
-}
-.lesson-item3{
-
 }
