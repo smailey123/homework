@@ -1,13 +1,13 @@
 // document.cookies =
 //   "Math1,8:00,;Math2,9:30,;Math3,11:30,;.History1,8:30,;History2,10:30,;History3,12:30,;.Literature1,8:30,;Literature1,10:30,;Literature1,12:30,;.";
 console.log("Те, як розклад виглядає в кукі", document.cookie);
-document.cookie = "qwer=23423;path=/;max-age=10000000000000000000000"
+document.cookie = "path=/;max-age=10000000000000000000000"
 //перетворення розкладу з кукі у js
 function convertFromCookiesToJs() {
     let lessons;
     if(!document.cookie) {
         console.log('dd')
-        document.cookie = "qwer=23423;path=/;max-age=100000000"
+        document.cookie = "path=/;max-age=100000000"
         console.log("asd",document.cookie)
         lessons = [
             [],
