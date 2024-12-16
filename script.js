@@ -1,14 +1,35 @@
 // document.cookies =
 //   "Math1,8:00,;Math2,9:30,;Math3,11:30,;.History1,8:30,;History2,10:30,;History3,12:30,;.Literature1,8:30,;Literature1,10:30,;Literature1,12:30,;.";
-console.log("Те, як розклад виглядає в кукі", document.cookie);
-document.cookie = "path=/;max-age=10000000000000000000000"
+console.log("Те, як sdfasрозклад виглядає в кукі", document.cookie);
+
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+function getCookie(name){
+  const cookies = document.cookie.split("; ")
+  let cookieValue;
+  cookies.forEach(_cookie => {
+    const [_name,value] = _cookie.split("=");
+    if(name === _name) cookieValue = value;
+  })
+  return cookieValue;
+}
+
+const scheduleCookies = document.cookie
+console.log("scheduleCookies",getCookie("schedule"))
+// Usage:
+
 //перетворення розкладу з кукі у js
 function convertFromCookiesToJs() {
     let lessons;
-    if(!document.cookie) {
-        console.log('dd')
-        document.cookie = "path=/;max-age=100000000"
-        console.log("asd",document.cookie)
+    const scheduleCookie = getCookie("schedule");
+    if(!scheduleCookie) {
         lessons = [
             [],
             [],
@@ -21,7 +42,7 @@ function convertFromCookiesToJs() {
         return lessons;
     }
   //Ділю роклад за крапкою на дні
-  const days = document.cookie.split(".");
+  const days = scheduleCookie.split(".");
   console.log("Дні", days);
 
   //Ділю дні за крапкою з комою на заняття,
@@ -31,7 +52,7 @@ function convertFromCookiesToJs() {
     .map(
       (
         day //метод .map() це просто більш проста форма циклу for
-      ) => day.split(";").filter((lesson) => !!lesson)
+      ) => day.split("[").filter((lesson) => !!lesson)
     )
     .filter((day) => day.length != 0);
   console.log("Невідформатовані заняття", lessonsNotFormatted);
@@ -84,14 +105,13 @@ for(let i = 0;i < dayButtons.length;i++){
                 <p class="lessons-item2">${lessons[dayNumber][i].name}</p>
             </div>`
         }    
-        console.log(dayNumber);
     });
 }
 
 let create_button = document.querySelector('.create-button')
 let nameInput = document.querySelector('.name')
 let time = document.querySelector('.time')
-console.log("sadfdsa",lessons[dayNumber])
+
 function onAdd(dayNumber, time, name) {
     lessons[dayNumber].push({ name, time });
 }
@@ -99,17 +119,16 @@ function onAdd(dayNumber, time, name) {
 function saveToCookies() {
     let cookiesShedule = "";
   
-    // document.cookies
     lessons.forEach((day) => {
       day.forEach((lesson) => {
         cookiesShedule += lesson.name + ",";
-        cookiesShedule += lesson.time + ",;";
+        cookiesShedule += lesson.time + ",[";
       });
       cookiesShedule += ".";
     });
-  
-    document.cookie = cookiesShedule;
-    console.log("SADF",cookiesShedule);
+    console.log(lessons);
+    console.log(cookiesShedule);
+    setCookie("schedule",cookiesShedule,365);
 }
 
 create_button.addEventListener("click", function(e){
@@ -122,7 +141,4 @@ create_button.addEventListener("click", function(e){
                 <p class="lessons-item2">${lessons[dayNumber][lessons[dayNumber].length - 1].name}</p>
             </div>`
     saveToCookies()
-    console.log("les",lessons)
-    console.log('name')
-
 })
