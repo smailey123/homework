@@ -30,6 +30,7 @@ function convertFromCookiesToJs() {
     let lessons;
     const scheduleCookie = getCookie("schedule");
     if(!scheduleCookie) {
+      setCookie("schedule","[.[.[.[.[.[.[.")
         lessons = [
             [],
             [],
@@ -39,10 +40,11 @@ function convertFromCookiesToJs() {
             [],
             [],
         ]
+        console.log("l",lessons)
         return lessons;
     }
   //Ділю роклад за крапкою на дні
-  const days = scheduleCookie.split(".");
+  const days = scheduleCookie.split(".").filter(day => day);
   console.log("Дні", days);
 
   //Ділю дні за крапкою з комою на заняття,
@@ -52,9 +54,10 @@ function convertFromCookiesToJs() {
     .map(
       (
         day //метод .map() це просто більш проста форма циклу for
-      ) => day.split("[").filter((lesson) => !!lesson)
-    )
-    .filter((day) => day.length != 0);
+      ) => {
+        return day === "[" ? [] : day.split("[").filter((lesson) => lesson)
+      }
+    );
   console.log("Невідформатовані заняття", lessonsNotFormatted);
 
   //Ділю заняття по ,
@@ -77,34 +80,60 @@ function convertFromCookiesToJs() {
   return lessons
 }
 let lessons = convertFromCookiesToJs();
+console.log(lessons);
 let h2 = document.querySelector('h2')
 let dayNumber = 0
 let dayButtons = document.querySelectorAll('.day1')
 let _lessons = document.querySelector('.lessons')
 
-_lessons.innerHTML = ``
-if(lessons[dayNumber]){
-    for(let i = 0;i < lessons[dayNumber].length;i++){
-        _lessons.innerHTML += `<div class="lessons-item1">
-            <p class="lessons-item3">${lessons[dayNumber][i].time} </p>
-            <p class="lessons-item2">${lessons[dayNumber][i].name}</p>
-        </div>`
-    } 
-    
+function deleteLesson(i) {
+  lessons[dayNumber] = lessons[dayNumber].filter((lesson,_i) => _i !== i)
+  console.log("delete",lessons)
+  printLessons();  
+  saveToCookies();
 }
+_lessons.innerHTML = ``
+const printLessons = () => {
+  _lessons.innerHTML = ``
+  for(let i = 0;i < lessons[dayNumber].length;i++){
+      _lessons.innerHTML += `<div class="lessons-item1">
+          <p class="lessons-item3">${lessons[dayNumber][i].time} </p>
+          <p class="lessons-item2">${lessons[dayNumber][i].name}</p>
+          <button class="delete">x</button>
+      </div>`
+  }  
+}
+
+if(lessons[dayNumber]){
+
+  printLessons();  
+  const deleteButtons = document.querySelectorAll(".delete");
+
+  console.log("deleteButtons",deleteButtons)
+  for(let i = 0;i < lessons[dayNumber].length;i++){
+    deleteButtons[i].addEventListener("click",() => {
+      deleteLesson(i);
+      console.log("delete",lessons)
+    })
+  }
+}
+
+
 
 for(let i = 0;i < dayButtons.length;i++){
     dayButtons[i].addEventListener("click", function(){
         dayNumber = i
         time.value = ''
         nameInput.value = ''
-        _lessons.innerHTML = ``
+        printLessons();  
+        const deleteButtons = document.querySelectorAll(".delete");
         for(let i = 0;i < lessons[dayNumber].length;i++){
-            _lessons.innerHTML += `<div class="lessons-item1">
-                <p class="lessons-item3">${lessons[dayNumber][i].time} </p>
-                <p class="lessons-item2">${lessons[dayNumber][i].name}</p>
-            </div>`
-        }    
+          deleteButtons[i].addEventListener("click",() => {
+            deleteLesson(i);
+
+          })
+        }
+        
     });
 }
 
@@ -118,14 +147,26 @@ function onAdd(dayNumber, time, name) {
 
 function saveToCookies() {
     let cookiesShedule = "";
-  
-    lessons.forEach((day) => {
-      day.forEach((lesson) => {
-        cookiesShedule += lesson.name + ",";
-        cookiesShedule += lesson.time + ",[";
-      });
-      cookiesShedule += ".";
-    });
+
+    for(let i = 0;i < 7;i++){
+      if(lessons[i].length === 0) {
+        cookiesShedule += "["
+      }else{
+        for(let j = 0;j < lessons[i].length;j++){
+          cookiesShedule += lessons[i][j].name + ",";
+          cookiesShedule += lessons[i][j].time + ",[";
+        }
+        
+      }
+      cookiesShedule += "."
+    }
+    // lessons.forEach((day) => {
+    //   day.forEach((lesson) => {
+    //     cookiesShedule += lesson.name + ",";
+    //     cookiesShedule += lesson.time + ",[";
+    //   });
+    //   cookiesShedule += ".";
+    // });
     console.log(lessons);
     console.log(cookiesShedule);
     setCookie("schedule",cookiesShedule,365);
@@ -136,9 +177,15 @@ create_button.addEventListener("click", function(e){
     onAdd(dayNumber,time.value,nameInput.value)
     time.value = ''
     nameInput.value = ''
-    _lessons.innerHTML += `<div class="lessons-item1">
-                <p class="lessons-item3">${lessons[dayNumber][lessons[dayNumber].length - 1].time} </p>
-                <p class="lessons-item2">${lessons[dayNumber][lessons[dayNumber].length - 1].name}</p>
-            </div>`
-    saveToCookies()
+
+    printLessons();
+    const deleteButtons = document.querySelectorAll(".delete");
+
+    for(let i = 0;i < lessons[dayNumber].length;i++){
+      deleteButtons[i].addEventListener("click",() => {
+        deleteLesson(i);
+
+      })
+    }
+    saveToCookies();
 })
