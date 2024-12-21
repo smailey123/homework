@@ -177,10 +177,13 @@ function saveToCookies() {
 
 create_button.addEventListener("click", function(e){
     e.preventDefault()
+    if( time.value === "" || nameInput.value === '') return;
+
     onAdd(dayNumber,time.value,nameInput.value)
     time.value = ''
     nameInput.value = ''
     console.log("lesson3",)
+
 
     printLessons();
     // const deleteButtons = document.querySelectorAll(".delete");

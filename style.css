@@ -69,6 +69,11 @@ padding: 2%;
 border-radius: 30px;
 text-align: center;
 }
+
+.create-button:hover{
+    background-color:#d49c6a;
+    transition:0.5s;
+}
 .name{
 color: #804715;
 background-color: #FFD2AA;
@@ -115,6 +120,7 @@ h2{
     width: 100%;
     border-radius: 30px;
     padding: 10px;
+    align-items: center;
     margin: 10px;
 }
 
@@ -129,11 +135,18 @@ form{
 }
 .delete{
     border-radius: 50%;
+    width:40px;
+    align-items: center;
+    justify-content: center;
+    object-fit: contain;
+    height: 40px;
+    display: flex;
     outline: none;
     border: 1px solid black;
     background-color: #E4AE7E;
 }
+
 .image{
-    width:20px;
-    height: 20px;
+    width:30px;
+    height: 30px;
 }
