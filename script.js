@@ -86,8 +86,8 @@ let dayNumber = 0
 let dayButtons = document.querySelectorAll('.day1')
 let _lessons = document.querySelector('.lessons')
 
-function deleteLesson(i) {
-  lessons[dayNumber] = lessons[dayNumber].filter((lesson,_i) => _i !== i)
+function deleteLesson(lesson) {
+  lessons[dayNumber] = lessons[dayNumber].filter((_lesson,_i) => lesson.name !== _lesson.name || lesson.time !== _lesson.time)
   console.log("delete",lessons)
   printLessons();  
   saveToCookies();
@@ -99,40 +99,43 @@ const printLessons = () => {
       _lessons.innerHTML += `<div class="lessons-item1">
           <p class="lessons-item3">${lessons[dayNumber][i].time} </p>
           <p class="lessons-item2">${lessons[dayNumber][i].name}</p>
-          <button class="delete">x</button>
+          <button class="delete"><img class='image' src='https://cdn-icons-png.flaticon.com/512/1483/1483063.png'></button>
       </div>`
   }  
+  const deleteButtons = document.querySelectorAll(".delete");
+  console.log("fd",deleteButtons)
+  for(let i = 0;i < lessons[dayNumber].length;i++){
+    deleteButtons[i].addEventListener("click",() => {
+      deleteLesson(lessons[dayNumber][i]);
+    })
+  }
 }
 
 if(lessons[dayNumber]){
 
   printLessons();  
-  const deleteButtons = document.querySelectorAll(".delete");
+  // const deleteButtons = document.querySelectorAll(".delete");
 
-  console.log("deleteButtons",deleteButtons)
-  for(let i = 0;i < lessons[dayNumber].length;i++){
-    deleteButtons[i].addEventListener("click",() => {
-      deleteLesson(i);
-      console.log("delete",lessons)
-    })
-  }
+  // console.log("deleteButtons",deleteButtons)
+  // for(let i = 0;i < lessons[dayNumber].length;i++){
+  //   deleteButtons[i].addEventListener("click",() => {
+  //     deleteLesson(lessons[dayNumber][i].name);
+  //     console.log("delete",lessons)
+  //   })
+  // }
 }
 
 
 
 for(let i = 0;i < dayButtons.length;i++){
     dayButtons[i].addEventListener("click", function(){
+        dayButtons[dayNumber].style.background='#ECC989'
         dayNumber = i
         time.value = ''
         nameInput.value = ''
-        printLessons();  
-        const deleteButtons = document.querySelectorAll(".delete");
-        for(let i = 0;i < lessons[dayNumber].length;i++){
-          deleteButtons[i].addEventListener("click",() => {
-            deleteLesson(i);
-
-          })
-        }
+        printLessons();
+        dayButtons[i].style.background='#d49c6a'
+        
         
     });
 }
@@ -177,15 +180,20 @@ create_button.addEventListener("click", function(e){
     onAdd(dayNumber,time.value,nameInput.value)
     time.value = ''
     nameInput.value = ''
+    console.log("lesson3",)
 
     printLessons();
-    const deleteButtons = document.querySelectorAll(".delete");
+    // const deleteButtons = document.querySelectorAll(".delete");
+    // console.log("lesson35",)
 
-    for(let i = 0;i < lessons[dayNumber].length;i++){
-      deleteButtons[i].addEventListener("click",() => {
-        deleteLesson(i);
+    // for(let i = 0;i < lessons[dayNumber].length;i++){
+    //   deleteButtons[i].addEventListener("click",() => {
+    //     console.log("lesson",lessons[dayNumber][i])
 
-      })
-    }
+    //     deleteLesson(lessons[dayNumber][i].name);
+
+
+    //   })
+    // }
     saveToCookies();
 })
