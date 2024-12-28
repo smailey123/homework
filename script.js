@@ -110,7 +110,7 @@ const printLessons = () => {
     })
   }
 }
-
+console.log(dayButtons[0]);
 if(lessons[dayNumber]){
 
   printLessons();  
@@ -124,13 +124,17 @@ if(lessons[dayNumber]){
   //   })
   // }
 }
+let day_names= ["Понеділок", "Вівторок", "Середа", "Четвер","П'ятниця", "Субота", "Неділя"]
 
+let day_name= document.querySelector('.day_name')
 
-
+dayButtons[0].style.background='#d49c6a'
+day_name.innerHTML = day_names[0]
 for(let i = 0;i < dayButtons.length;i++){
     dayButtons[i].addEventListener("click", function(){
         dayButtons[dayNumber].style.background='#ECC989'
         dayNumber = i
+        day_name.innerHTML = day_names[i]
         time.value = ''
         nameInput.value = ''
         printLessons();
